@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversión de Coordenadas</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #1b0808;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        h2 {
+            color: #444;
+            margin-bottom: 20px;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #666;
+            font-weight: 500;
+        }
+        input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #333;
+        }
+        button {
+            width: 100%;
+            background-color: #000007;
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #00020300;
+            transform: translateY(-1px);
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section:last-of-type {
+            margin-bottom: 0;
+        }
+    </style>
+    <script>
+        function convertirPolaresARectangulares() {
+            const r = parseFloat(document.getElementById('r').value);
+            const theta = parseFloat(document.getElementById('theta').value);
+            
+            const x = r * Math.cos(theta);
+            const y = r * Math.sin(theta);
+            
+            document.getElementById('resultRectangulares').innerText = `x: ${x.toFixed(2)}, y: ${y.toFixed(2)}`;
+        }
+        
+        function convertirRectangularesAPolares() {
+            const x = parseFloat(document.getElementById('x').value);
+            const y = parseFloat(document.getElementById('y').value);
+            
+            const r = Math.sqrt(x * x + y * y);
+            const theta = Math.atan2(y, x);
+            
+            document.getElementById('resultPolares').innerText = `r: ${r.toFixed(2)}, θ: ${theta.toFixed(2)} rad`;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Conversión de Coordenadas</h1>
+        
+        <div class="section">
+            <h2>Coordenadas Polares a Rectangulares</h2>
+            <label for="r">r:</label>
+            <input type="number" id="r" step="any" placeholder="Introduce r">
+            <label for="theta">θ (radianes):</label>
+            <input type="number" id="theta" step="any" placeholder="Introduce θ">
+            <button onclick="convertirPolaresARectangulares()">Convertir a Rectangulares</button>
+            <div id="resultRectangulares" class="result"></div>
+        </div>
+        
+        <div class="section">
+            <h2>Coordenadas Rectangulares a Polares</h2>
+            <label for="x">x:</label>
+            <input type="number" id="x" step="any" placeholder="Introduce x">
+            <label for="y">y:</label>
+            <input type="number" id="y" step="any" placeholder="Introduce y">
+            <button onclick="convertirRectangularesAPolares()">Convertir a Polares</button>
+            <div id="resultPolares" class="result"></div>
+        </div>
+    </div>
+</body>
+</html>
